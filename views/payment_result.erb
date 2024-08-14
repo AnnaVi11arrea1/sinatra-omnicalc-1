@@ -1,17 +1,33 @@
-<h1>Payment Calulator</h1>
+<h1>Payment Results</h1>
 
-<%= params %>
+
 <dl>
-  <dt>
-    Monthly Payment is
-  </dt>
-  <dd>
-    <%= @payment %>
-  </dd>
+   <dt>
+      APR
+    </dt>
+    <dd>
+      <%= @apr %>
+    </dd>
+    <dt>
+      Number of years
+    </dt>
+    <dd>
+      <%= @years %>
+    </dd>
+    <dt>
+      Principal
+    </dt>
+    <dd>
+      <%= @principal %>
+    </dd>
+    <dt>
+      Payment
+    </dt>
+    <dd>
+      <%= @payment %>
+    </dd>
+</dl>
 
- 
-<dl>
-
-<a href="payment/new">
-  Get another payment
+<a href="/payment/new">
+  Calculate another payment
 </a>

@@ -44,14 +44,20 @@ get("/payment/new") do
 end
 get("/payment/result") do
   rate_pp = params.fetch("r").to_f
-  rate = ((rate_pp/100)/12).to_f
-  r = round(rate).to_fs(:percentage, { :precision => 4 })
+  rate = (rate_pp/100)/12.to_f
+  r = rate.round(4)
   num_periods = params.fetch("n").to_i
-  n = num_periods * 12
+  n = (num_periods * 12).to_i
   pv = params.fetch("pv").to_f
-  numr = (r*pv).to_f
-  denom = (1-(1 + r)**-n).to_f
-  @payment = (numer/denom).to_fs(:currency)
+  numr = r*pv
+  denom = 1-((1 + r)**-n)
+
+  @apr = rate_pp.to_fs(:percentage, { :precision => 4} ) 
+  @years = num_periods
+  @principal = pv.to_fs(:currency)
+
+  payment = (numr/denom).round(2)
+  @payment = payment.to_fs(:currency, { :precision => 2 })
   
   erb(:payment_result, { :layout => :layout })
 end
