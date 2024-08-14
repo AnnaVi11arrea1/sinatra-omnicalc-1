@@ -45,6 +45,10 @@ class JsonOutputFormatter < RSpec::Core::Formatters::JsonFormatter
     ].join(", ")
   end
 
+     # Log the summary
+     @logger.info("Summary: #{@output_hash[:summary]}")
+     @logger.info("Summary Line: #{@output_hash[:summary_line]}")
+
   def close(_notification)
     output.write Oj.dump @output_hash
   end
